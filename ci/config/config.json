@@ -1,0 +1,16 @@
+{
+    "builds": {
+        "dev": {
+            "serve": {
+                "port": 8011
+            },
+            "dir": "public/dev/"
+        },
+        "dist": {
+            "serve": {
+                "port": 8111
+            },
+            "dir": "public/dist/"
+        }
+    }
+}
