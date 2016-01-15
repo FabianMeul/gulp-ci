@@ -4,6 +4,9 @@
 
 var gulp = require("gulp");
 
+// Load CI components
+var templateCache = require('./angular/template-cache.js');
+
 // Load the build configuration
 var config = require("./config/config.json");
 
@@ -45,5 +48,6 @@ gulp.task("watch-templates", function() {
     ];
 
     gulp.watch(patterns, function() {
+        gulp.run("angular:template-cache");
     });
 });
