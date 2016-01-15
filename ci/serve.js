@@ -31,14 +31,14 @@ var webserverOptions = {
 gulp.task("serve", function() {
 
     // Source
-    var source = config.builds.dev.dir;
+    var source = config.env.dev.serve.dir;
 
     // Set the default port on which to serve the project
-    webserverOptions.port = config.builds.dev.serve.port;
+    webserverOptions.port = config.env.dev.serve.port;
 
     // Set the parameters based on the environment
     if (buildHelper.environment === "dist") {
-        source = config.builds.dist.dir;
+        source = config.env.dist.serve.dir;
         webserverOptions.port = config.builds.dist.serve.port;
     }
 

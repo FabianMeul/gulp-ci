@@ -1,16 +1,35 @@
 {
-    "builds": {
+    "env": {
         "dev": {
             "serve": {
-                "port": 8011
+                "port": 8011,
+                "dir": "public/dev/"
             },
-            "dir": "public/dev/"
+            "styles": {
+                "dir": "public/dev/assets/scss",
+                "files": "*.s{a|c}ss"
+            },
+            "scripts": {
+                "dir": "public/dev/app",
+                "files": "*.js"
+            }
         },
         "dist": {
             "serve": {
-                "port": 8111
+                "port": 8111,
+                "dir": "public/dist/"
             },
-            "dir": "public/dist/"
+            "styles": {
+                "dir": "public/dist/assets/css",
+                "files": "*.css"
+            },
+            "scripts": {
+                "dir": "public/dist/app",
+                "files": "*.js"
+            }
         }
+    },
+    "template-cache": {
+        "module": "app"
     }
 }

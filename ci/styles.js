@@ -21,8 +21,8 @@ var buildHelper = require("./build-helpers.js");
 gulp.task("styles", function() {
 
     // Source
-    var source = config.builds.dev.dir + "assets/scss/**/*.scss";
-    var destination = config.builds.dev.dir + "assets/css/";
+    var source = config.env.dev.serve.dir + "assets/scss/**/*.scss";
+    var destination = config.env.dev.serve.dir + "assets/css/";
 
     // Sass options
     var options = {
@@ -58,8 +58,8 @@ gulp.task("styles", function() {
 // No sourcemap is generated.
 gulp.task("build-styles", function() {
     // Source
-    var source = config.builds.dev.dir + "assets/scss/**/*.scss";
-    var destination = config.builds.dist.dir + "assets/css/";
+    var source = config.env.dev.serve.dir + "assets/scss/**/*.scss";
+    var destination = config.env.dist.serve.dir + "assets/css/";
 
     // Sass options
     var options = {

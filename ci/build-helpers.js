@@ -20,7 +20,7 @@ var bowerConfig = function bowerConfig() {
             gUtil.log('No .bowerrc file was found. The file contents cannot be used to exclude files from compilation.');
             return "";
         };
-        _bowerConfig = JSON.parse(bowerFile);
+        _bowerConfig = JSON.parse(this.bowerFile);
         _bowerConfig.directory += "/";
     }
 
@@ -33,6 +33,7 @@ var timestamp = new Date() / 1;
 // Set the environment context
 var environment = gUtil.env.env || "dev";
 
+// Exposed properties
 module.exports.bowerConfig = bowerConfig;
 module.exports.timestamp = timestamp;
 module.exports.environment = environment;

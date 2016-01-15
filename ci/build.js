@@ -47,7 +47,7 @@ var buildHelper = require("./build-helpers.js");
 // Clean up the deploy folder
 gulp.task("clean", function(callback) {
     var patterns = [
-        config.builds.dist.dir + "**/*"
+        config.env.dist.serve.dir + "**/*"
     ];
 
     return del(patterns);
@@ -57,17 +57,17 @@ gulp.task("clean", function(callback) {
 gulp.task("compressScripts", function(callback) {
     var patterns = [
         // Custom scripts
-        config.builds.dev.dir + "app/app.module.js",
-        config.builds.dev.dir + "app/app.config.js",
-        config.builds.dev.dir + "app/app.router.js",
-        config.builds.dev.dir + "app/**/*.js",
+        config.env.dev.serve.dir + "app/app.module.js",
+        config.env.dev.serve.dir + "app/app.config.js",
+        config.env.dev.serve.dir + "app/app.router.js",
+        config.env.dev.serve.dir + "app/**/*.js",
 
         // Exclude vendor scripts
         "!" + buildHelper.bowerConfig().directory + "/**/*"
     ];
 
     // Destination folder
-    var destination = config.builds.dist.dir + "app";
+    var destination = config.env.dist.serve.dir + "app";
 
     return gulp.src(patterns)
         .pipe(concat("app-" + buildHelper.timestamp + ".js"))
@@ -83,7 +83,7 @@ gulp.task("compressImages", function(callback) {
 
     // Globbing patterns
     var patterns = [
-        config.builds.dev.dir + "assets/img/**/*"
+        config.env.dev.serve.dir + "assets/img/**/*"
     ];
 
     // ImageMin options
@@ -93,7 +93,7 @@ gulp.task("compressImages", function(callback) {
     };
 
     // File destination
-    var destination = config.builds.dist.dir + "assets/img/";
+    var destination = config.env.dist.serve.dir + "assets/img/";
 
     return gulp.src(patterns)
         .pipe(imageMin(options))
@@ -106,8 +106,8 @@ gulp.task("compressBower", function(callback) {
     var scriptsFilter = gulpFilter("**/*.js", { restore: true });
     var stylesFilter = gulpFilter("**/*.css", { restore: true });
 
-    var scriptsDestination = config.builds.dist.dir + "app/";
-    var stylesDestination = config.builds.dist.dir + "assets/css/";
+    var scriptsDestination = config.env.dist.serve.dir + "app/";
+    var stylesDestination = config.env.dist.serve.dir + "assets/css/";
 
     return gulp.src(mainBowerFiles())
 
@@ -133,7 +133,7 @@ gulp.task("compressBower", function(callback) {
 });
 
 // Copy fonts into the dist directory
-gulp.task("copyFonts", function(callback) {
+gulp.task("copy-fonts", function(callback) {
 
     // Globbing patterns
     var patterns = [
@@ -141,32 +141,32 @@ gulp.task("copyFonts", function(callback) {
     ];
 
     // Destination
-    var destination = config.builds.dist.dir + "assets/fonts/";
+    var destination = config.env.dist.serve.dir + "assets/fonts/";
 
     return gulp.src(patterns)
         .pipe(gulp.dest(destination));
 });
 
 // Copy the templates into the dist directory
-gulp.task("copyTemplates", function(callback) {
+gulp.task("copy-templates", function(callback) {
     // Globbing patterns
     var patterns = [
-        config.builds.dev.dir + "/app/**/*.html",
+        config.env.dev.serve.dir + "/app/**/*.html",
         "!" + buildHelper.bowerConfig().directory + "**/*"
     ];
 
     // Destination
-    var destination = config.builds.dist.dir + "app/";
+    var destination = config.env.dist.serve.dir + "app/";
 
     return gulp.src(patterns)
         .pipe(gulp.dest(destination));
 });
 
 // Copy index.html and replace some values
-gulp.task("html", function(callback) {
+gulp.task("build-html", function(callback) {
 
     // Source
-    var source = config.builds.dev.dir + "index.html";
+    var source = config.env.dev.serve.dir + "index.html";
 
     // HTML Replace options
     var options = {
@@ -181,7 +181,7 @@ gulp.task("html", function(callback) {
     };
 
     // Destination
-    var destination = config.builds.dist.dir;
+    var destination = config.env.dist.serve.dir;
 
     return gulp.src(source)
         .pipe(htmlReplace(options))
@@ -203,9 +203,9 @@ gulp.task("saveTimestamp", function(callback) {
 gulp.task("build", function(callback) {
     runSequence(
         "clean",
-        ["compressScripts", "compressImages", "build-styles", "compressBower", "copyFonts", "copyTemplates"],
+        ["compressScripts", "compressImages", "build-styles", "compressBower", "copy-fonts", "copy-templates"],
         "saveTimestamp",
-        "html",
+        "build-html",
         callback
     );
 });

@@ -3,6 +3,7 @@
 // Create a template cache for AngularJS Projects
 
 var gulp = require("gulp");
+var gUtil = require("gulp-util");
 var templateCache = require("gulp-angular-templatecache");
 
 // Load the build configuration
@@ -16,13 +17,18 @@ gulp.task('angular:template-cache', function() {
     ];
 
     // TemplateCache options
-    var options = {
-        module: config.template-cache.module
-    };
+    var options = {};
+    if (config.template-cache) {
+        options = {
+            module: config.template-cache.module
+        };
+    } else {
+        gUtil.log('No angular-template-cache configuration was found. This might be an error, so we\'re letting you know ;-).');
+    }
 
     var destination = config.env.dist.serve.dir + "app";
 
     return gulp.src(patterns)
-        .pipe(templateCache())
-        .pipe(gulp.dest())
+        .pipe(templateCache(options))
+        .pipe(gulp.dest(destination));
 });

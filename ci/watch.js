@@ -15,11 +15,11 @@ gulp.task("watch-styles", function() {
 
     // Globbing patterns
     var patterns = [
-        config.builds.dev.dir + "assets/scss/**/*.scss"
+        config.env.dev.serve.dir + "assets/scss/**/*.scss"
     ];
 
     gulp.watch(patterns, function() {
-        gulp.run("sass");
+        gulp.run("styles");
     });
 });
 
@@ -28,7 +28,7 @@ gulp.task("watch-scripts", function() {
 
     // Globbing patterns
     var patterns = [
-        config.builds.dev.dir + "app/**/*.js"
+        config.env.dev.serve.dir + "app/**/*.js"
     ];
 
     gulp.watch(patterns, function() {
@@ -41,7 +41,7 @@ gulp.task("watch-templates", function() {
 
     // Globbing patterns
     var patterns = [
-        config.builds.dev.dir + "app/**/*.html"
+        config.env.serve.dir + "app/**/*.html"
     ];
 
     gulp.watch(patterns, function() {
