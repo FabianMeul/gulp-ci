@@ -10,6 +10,9 @@ var wiredep = require("wiredep").stream;
 // Load the build configuration
 var config = require("./config/config.json");
 
+// Load the build Helper
+var buildHelper = require("./build-helpers.js");
+
 // Install bower dependencies
 gulp.task("bower", function() {
     // Return a stream to support async

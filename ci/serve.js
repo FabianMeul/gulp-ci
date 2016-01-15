@@ -39,7 +39,7 @@ gulp.task("serve", function() {
     // Set the parameters based on the environment
     if (buildHelper.environment === "dist") {
         source = config.env.dist.serve.dir;
-        webserverOptions.port = config.builds.dist.serve.port;
+        webserverOptions.port = config.env.dist.serve.port;
     }
 
     return gulp.src(source)

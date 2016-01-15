@@ -18,15 +18,15 @@ gulp.task('angular:template-cache', function() {
 
     // TemplateCache options
     var options = {};
-    if (config.template-cache) {
+    if (config["template-cache"]) {
         options = {
-            module: config.template-cache.module
+            module: config["template-cache"].module
         };
     } else {
         gUtil.log('No angular-template-cache configuration was found. This might be an error, so we\'re letting you know ;-).');
     }
 
-    var destination = config.env.dist.serve.dir + "app";
+    var destination = config.env.dev.serve.dir + "app/";
 
     return gulp.src(patterns)
         .pipe(templateCache(options))
