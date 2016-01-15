@@ -33,7 +33,14 @@ var timestamp = new Date() / 1;
 // Set the environment context
 var environment = gUtil.env.env || "dev";
 
+// Generic error logger
+var onError = function onError(err) {
+    gUtil.log(gUtil.colors.bgRed.white("An error occured:"), gUtil.colors.red(err.message));
+    this.emit("end");
+};
+
 // Exposed properties
 module.exports.bowerConfig = bowerConfig;
 module.exports.timestamp = timestamp;
 module.exports.environment = environment;
+module.exports.onError = onError;

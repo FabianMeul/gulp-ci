@@ -8,22 +8,17 @@
 
 "use strict";
 
-var gulp = require("gulp"),
-    linting = require("./ci/linting"),
-    build = require("./ci/build"),
-    serve = require("./ci/serve"),
-    packages = require("./ci/packages"),
-    styles = require("./ci/styles"),
-    watch = require("./ci/watch"),
-    angularTemplateCache = require("./ci/angular/template-cache"),
-    buildHelper = require("./ci/build-helpers"),
+var gulp = require("gulp");
+var linting = require("./ci/linting");
+var build = require("./ci/build");
+var serve = require("./ci/serve");
+var packages = require("./ci/packages");
+var styles = require("./ci/styles");
+var watch = require("./ci/watch");
+var angularTemplateCache = require("./ci/angular/template-cache");
+var buildHelper = require("./ci/build-helpers");
 
-    runSequence = require("run-sequence"), // https://www.npmjs.com/package/run-sequence
-    //serverConfig = require("./config/config.js"),
-
-    onError = function onError(err) {
-        console.log(err);
-    };
+var runSequence = require("run-sequence"); // https://www.npmjs.com/package/run-sequence
 
 // Load the build Helper
 var buildHelper = require("./ci/build-helpers.js");
@@ -31,7 +26,7 @@ var buildHelper = require("./ci/build-helpers.js");
 gulp.task("default", function(callback) {
     runSequence(
         "bower",
-        ["serve", "sass", "wiredep", "lint-scripts", "watch"]
+        ["serve", "styles", "wiredep", "lint-scripts", "watch"]
     );
 });
 

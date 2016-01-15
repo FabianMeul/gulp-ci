@@ -16,7 +16,8 @@ var buildHelper = require("./build-helpers.js");
 // Install bower dependencies
 gulp.task("bower", function() {
     // Return a stream to support async
-    return bower();
+    return bower()
+        .on('error', buildHelper.onError);
 });
 
 // Bower integration
