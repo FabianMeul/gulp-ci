@@ -36,6 +36,18 @@ gulp.task("serve", function() {
     // Set the default port on which to serve the project
     webserverOptions.port = config.env.dev.serve.port;
 
+    if (config.env[buildHelper.environment] && config.env[buildHelper.environment].serve.proxies) {
+        // Add this in the config.json
+        // "proxies": [
+        //     {
+        //         "source": "/",
+        //         "target": "127.0.0.1",
+        //         "options": {}
+        //     }
+        // ]
+        webserverOptions.proxies = config.env[buildHelper.environment].serve.proxies;
+    }
+
     // Set the parameters based on the environment
     if (buildHelper.environment === "dist") {
         source = config.env.dist.serve.dir;

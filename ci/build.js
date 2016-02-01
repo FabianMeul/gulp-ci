@@ -203,7 +203,7 @@ gulp.task("saveTimestamp", function(callback) {
 gulp.task("build", function(callback) {
     runSequence(
         "clean",
-        ["compressScripts", "compressImages", "build-styles", "compressBower", "copy-fonts"/*, "copy-templates"*/],
+        ["compressScripts", "compressImages", "styles", "compressBower", "copy-fonts"/*, "copy-templates"*/],
         "saveTimestamp",
         "build-html",
         callback

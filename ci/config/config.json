@@ -2,21 +2,30 @@
     "env": {
         "dev": {
             "serve": {
-                "port": 8011,
+                "port": 8100,
                 "dir": "public/dev/"
             },
+            "sass": {
+                "dir": "public/dev/assets/scss/",
+                "files": "**/*.s{a|c}ss"
+            },
             "styles": {
-                "dir": "public/dev/assets/scss",
-                "files": "*.s{a|c}ss"
+                "dir": "public/dev/assets/css/",
+                "files": "*.css"
             },
             "scripts": {
-                "dir": "public/dev/app",
-                "files": "*.js"
+                "dir": "public/dev/app/",
+                "files": "**/*.js"
+            },
+            "images": {
+                "dir": "public/dev/assets/img/",
+                "files": "**/*"
             }
         },
+
         "dist": {
             "serve": {
-                "port": 8111,
+                "port": 7100,
                 "dir": "public/dist/"
             },
             "styles": {
@@ -26,6 +35,10 @@
             "scripts": {
                 "dir": "public/dist/app",
                 "files": "*.js"
+            },
+            "images": {
+                "dir": "public/dist/assets/img/",
+                "files": "**/*"
             }
         }
     },
