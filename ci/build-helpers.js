@@ -27,11 +27,29 @@ var bowerConfig = function bowerConfig() {
     return _bowerConfig;
 };
 
+// Return the absolute path of the project
+var absolutePath = function absolutePath() {
+    return __dirname + "/../";
+};
+
 // Create a timestamp for the build
 var timestamp = new Date() / 1;
 
+var addTimestamp = function addTimestamp(prefix, suffix) {
+    this.path = "";
+
+    if (noTimestamp) {
+        this.path = prefix + "-" + timestamp + suffix;
+    } else {
+        this.path = prefix + suffix;
+    }
+
+    return this.path;
+};
+
 // Set the environment context
 var environment = gUtil.env.env || "dev";
+var noTimestamp = gUtil.env.noTimestamp || true;
 
 // Generic error logger
 var onError = function onError(err) {
@@ -43,4 +61,8 @@ var onError = function onError(err) {
 module.exports.bowerConfig = bowerConfig;
 module.exports.timestamp = timestamp;
 module.exports.environment = environment;
+
+// Exposed functions
+module.exports.absolutePath = absolutePath;
+module.exports.addTimestamp = addTimestamp;
 module.exports.onError = onError;

@@ -5,6 +5,7 @@
 var gulp = require("gulp");
 var gutil = require("gulp-util"); // https://github.com/gulpjs/gulp-util
 var autoprefixer = require("gulp-autoprefixer"); // https://www.npmjs.com/package/gulp-autoprefixer
+var cssNano = require("gulp-cssnano"); // https://github.com/ben-eb/gulp-cssnano
 var sass = require("gulp-sass"); // https://www.npmjs.com/package/gulp-sass
 var sassGlob = require("gulp-sass-glob"); // https://www.npmjs.com/package/gulp-sass-glob
 var sourcemaps = require("gulp-sourcemaps"); // https://www.npmjs.com/package/gulp-sourcemaps
@@ -17,19 +18,21 @@ var config = require("./config/config.json");
 var buildHelper = require("./build-helpers.js");
 
 
-// Compile sass
-gulp.task("styles", function() {
+var compileStyles = function compileStyles(env) {
+    console.log("environment",env);
 
     // Source
-    var source = config.env.dev.serve.dir + "assets/scss/**/*.scss";
-    var destination = config.env.dev.serve.dir + "assets/css/";
+    var source = config.env.dev.styles.dir + config.env.dev.styles.files;
+    var destination = config.env[env].styles.dir;
+
+    console.log(source);
 
     // Sass options
     var options = {
         outputStyle: "expanded",
         includePaths: [
             // Include bower packages as a souce for @import statements
-            buildHelper.bowerConfig().directory // TODO: Fix import path
+            buildHelper.absolutePath() + buildHelper.bowerConfig().directory
         ]
     };
 
@@ -40,46 +43,24 @@ gulp.task("styles", function() {
     };
 
     return gulp.src(source)
-        .on("error", gutil.log)
         .pipe(sourcemaps.init())
         // Glob sass files
         .pipe(sassGlob())
         // Compile sass
-        .pipe(sass(options))
+        .pipe(sass(options).on("error", sass.logError))
         // Autoprefix the generated CSS file
         .pipe(autoprefixer("last 3 versions"))
+        // Minify the CSS file
+        .pipe(cssNano())
+        // Rename the generated CSS file
+        .pipe(rename(buildHelper.addTimestamp("styles", ".min.css")))
         .pipe(sourcemaps.write("sourcemap", sourcemapOptions))
         // Save CSS files
         .pipe(gulp.dest(destination));
-});
+}
 
-// Build sass
-// Compile and compress the styles.
-// No sourcemap is generated.
-gulp.task("build-styles", function() {
-    // Source
-    var source = config.env.dev.serve.dir + "assets/scss/**/*.scss";
-    var destination = config.env.dist.serve.dir + "assets/css/";
 
-    // Sass options
-    var options = {
-        outputStyle: "compressed",
-        includePaths: [
-            // Include bower packages as a souce for @import statements
-            buildHelper.bowerConfig().directory // TODO: Fix import path
-        ]
-    };
-
-    return gulp.src(source)
-        .on("error", gutil.log)
-        // Glob sass files
-        .pipe(sassGlob())
-        // Compile sass
-        .pipe(sass(options))
-        // Autoprefix the generated CSS file
-        .pipe(autoprefixer("last 3 versions"))
-        // Rename the generated CSS file
-        .pipe(rename("styles-" + buildHelper.timestamp + ".min.css"))
-        // Save CSS files
-        .pipe(gulp.dest(destination));
+// Compile sass
+gulp.task("styles", function() {
+    return compileStyles(buildHelper.environment);
 });
