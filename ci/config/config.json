@@ -7,14 +7,14 @@
             },
             "sass": {
                 "dir": "public/dev/assets/scss/",
-                "files": "**/*.s{a|c}ss"
+                "files": "**/*.s{a,c}ss"
             },
             "styles": {
                 "dir": "public/dev/assets/css/",
                 "files": "*.css"
             },
             "scripts": {
-                "dir": "public/dev/app/",
+                "dir": "public/dev/assets/scripts/",
                 "files": "**/*.js"
             },
             "images": {
@@ -41,8 +41,5 @@
                 "files": "**/*"
             }
         }
-    },
-    "template-cache": {
-        "module": "app"
     }
 }

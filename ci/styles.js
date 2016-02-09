@@ -17,15 +17,11 @@ var config = require("./config/config.json");
 // Load the build Helper
 var buildHelper = require("./build-helpers.js");
 
-
 var compileStyles = function compileStyles(env) {
-    console.log("environment",env);
 
     // Source
-    var source = config.env.dev.styles.dir + config.env.dev.styles.files;
+    var source = config.env.dev.sass.dir + config.env.dev.sass.files;
     var destination = config.env[env].styles.dir;
-
-    console.log(source);
 
     // Sass options
     var options = {

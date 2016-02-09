@@ -18,7 +18,7 @@ gulp.task("watch-styles", function() {
 
     // Globbing patterns
     var patterns = [
-        config.env.dev.serve.dir + "assets/scss/**/*.scss"
+        config.env.dev.sass.dir + config.env.dev.sass.files
     ];
 
     gulp.watch(patterns, function() {

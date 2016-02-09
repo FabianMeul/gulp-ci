@@ -24,7 +24,7 @@ gulp.task("bower", function() {
 gulp.task("wiredep", function () {
 
     // Source
-    var source = config.env.dev.serve.dir = "index.html";
+    var source = config.env.dev.serve.dir + "index.html";
 
     // Wiredep options
     var options = {

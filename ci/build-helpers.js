@@ -38,7 +38,7 @@ var timestamp = new Date() / 1;
 var addTimestamp = function addTimestamp(prefix, suffix) {
     this.path = "";
 
-    if (noTimestamp) {
+    if (environment !== "dev" && !noTimestamp) {
         this.path = prefix + "-" + timestamp + suffix;
     } else {
         this.path = prefix + suffix;
