@@ -17,11 +17,11 @@ var buildHelper = require("./build-helpers.js");
 gulp.task("bower", function() {
     // Return a stream to support async
     return bower()
-        .on('error', buildHelper.onError);
+        .on("error", buildHelper.onError);
 });
 
 // Bower integration
-gulp.task("wiredep", function () {
+gulp.task("wiredep", function() {
 
     // Source
     var source = config.env.dev.serve.dir + "index.html";

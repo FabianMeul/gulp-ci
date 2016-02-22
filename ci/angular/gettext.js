@@ -3,7 +3,7 @@
 // Gettext implementation for translations
 
 var gulp = require("gulp");
-var angularGettext = require('angular-gettext');
+var angularGettext = require("angular-gettext");
 
 // Load the build Helper
 var buildHelper = require("./build-helpers.js");
@@ -19,7 +19,7 @@ gulp.task("pot", function() {
     ];
 
     // Angular gettext options
-    var options = {}
+    var options = {};
 
     // Destination
     var destination = config.env.dev.serve.dir + "/assets/translations/pot";

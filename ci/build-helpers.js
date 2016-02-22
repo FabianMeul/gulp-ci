@@ -17,9 +17,9 @@ var bowerConfig = function bowerConfig() {
             this.bowerFile = fs.readFileSync(path.join(__dirname + "/../.bowerrc"), "utf8");
         } catch (e) {
             // Make sure the script doesn't crash if no file is found.
-            gUtil.log('No .bowerrc file was found. The file contents cannot be used to exclude files from compilation.');
+            gUtil.log("No .bowerrc file was found. The file contents cannot be used to exclude files from compilation.");
             return "";
-        };
+        }
         _bowerConfig = JSON.parse(this.bowerFile);
         _bowerConfig.directory += "/";
     }
