@@ -2,9 +2,9 @@
   // http://eslint.org/docs/rules/
 
   "ecmaFeatures": {
-    "arrowFunctions": false,                    // enable arrow functions
+    "arrowFunctions": true,                     // enable arrow functions
     "binaryLiterals": false,                    // enable binary literals
-    "blockBindings": false,                     // enable let and const (aka block bindings)
+    "blockBindings": true,                      // enable let and const (aka block bindings)
     "classes": false,                           // enable classes
     "defaultParams": false,                     // enable default function parameters
     "destructuring": false,                     // enable destructuring

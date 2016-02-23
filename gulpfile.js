@@ -16,6 +16,7 @@ var packages = require("./ci/packages");
 var styles = require("./ci/styles");
 var watch = require("./ci/watch");
 var angularTemplateCache = require("./ci/angular/template-cache");
+var babel = require("./ci/scripts/babel");
 var buildHelper = require("./ci/build-helpers");
 
 var runSequence = require("run-sequence"); // https://www.npmjs.com/package/run-sequence

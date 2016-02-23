@@ -55,16 +55,26 @@ gulp.task("clean", function(callback) {
 
 // Compress and concatenate scripts
 gulp.task("compressScripts", function(callback) {
+
+    // Globbing Patterns
     var patterns = [
         // Custom scripts
         config.env.dev.serve.dir + "app/app.module.js",
         config.env.dev.serve.dir + "app/app.config.js",
         config.env.dev.serve.dir + "app/app.router.js",
-        config.env.dev.serve.dir + "app/**/*.js",
+        config.env.dev.serve.dir + "**/*.js",
 
         // Exclude vendor scripts
         "!" + buildHelper.bowerConfig().directory + "/**/*"
     ];
+
+    // Uglify Options
+    var uglifyOptions = {
+        compress: {
+            "drop_console": true,
+            "drop_debugger": true
+        }
+    };
 
     // Destination folder
     var destination = config.env.dist.serve.dir + "app";
@@ -72,7 +82,7 @@ gulp.task("compressScripts", function(callback) {
     return gulp.src(patterns)
         .pipe(concat("app-" + buildHelper.timestamp + ".js"))
         .pipe(gulp.dest(destination))
-        .pipe(uglify())
+        .pipe(uglify(uglifyOptions))
         .pipe(rename("app-" + buildHelper.timestamp + ".min.js"))
         .pipe(gulp.dest(destination))
         .on("error", gutil.log);
