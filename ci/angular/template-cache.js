@@ -13,21 +13,22 @@ gulp.task("angular:template-cache", function() {
 
     // Globbing patterns
     var patterns = [
-        config.env.dev.serve.dir + "app/**/*.html"
+        config.env.dev.scripts.dir + "app/**/*.html"
     ];
 
     // TemplateCache options
     var options = {};
-    
+
     if (config["template-cache"]) {
         options = {
+            filename: config["template-cache"].filename || "app.templates.js",
             module: config["template-cache"].module
         };
     } else {
         gUtil.log("No angular-template-cache configuration was found. This might be an error, so we\'re letting you know ;-).");
     }
 
-    var destination = config.env.dev.serve.dir + "app/";
+    var destination = config.env.dev.scripts.dir + "app/";
 
     return gulp.src(patterns)
         .pipe(templateCache(options))
