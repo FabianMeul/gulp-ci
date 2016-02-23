@@ -6,14 +6,14 @@
 //
 "use strict";
 
-const gulp = require("gulp");
-const babel = require("gulp-babel");
-const sourcemaps = require("gulp-sourcemaps");
-const concat = require("gulp-concat");
+import gulp from "gulp";
+import babel from "gulp-babel";
+import sourcemaps from "gulp-sourcemaps";
+import concat from "gulp-concat";
 
 // Load the build configuration
-const config = require("./../config/config.json");
-const buildHelper = require("./../build-helpers.js");
+import config from "./../config/config.json";
+import buildHelper from "./../build-helpers.js";
 
 // Transpile ES6 to classic ES5
 gulp.task("scripts:babel", () => {

@@ -10,7 +10,7 @@
     "destructuring": false,                     // enable destructuring
     "forOf": false,                             // enable for-of loops
     "generators": false,                        // enable generators
-    "modules": false,                           // enable modules and global strict mode
+    "modules": true,                            // enable modules and global strict mode
     "objectLiteralComputedProperties": false,   // enable computed object literal property names
     "objectLiteralDuplicateProperties": false,  // enable duplicate object literal properties in strict mode
     "objectLiteralShorthandMethods": false,     // enable object literal shorthand methods
