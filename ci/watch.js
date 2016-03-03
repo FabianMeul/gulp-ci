@@ -44,7 +44,7 @@ gulp.task("watch-templates", function() {
 
     // Globbing patterns
     var patterns = [
-        config.env.dev.scripts.dir + "app/**/*.html"
+        config.env.dev.templates.dir + config.env.dev.templates.files
     ];
 
     gulp.watch(patterns, function() {

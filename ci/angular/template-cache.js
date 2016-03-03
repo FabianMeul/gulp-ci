@@ -2,14 +2,16 @@
 // ---
 // Create a template cache for AngularJS Projects
 
+"use strict";
+
 var gulp = require("gulp");
 var gUtil = require("gulp-util");
-var templateCache = require("gulp-angular-templatecache");
-
-// Load the build configuration
 var config = require("./../config/config.json");
 
 gulp.task("angular:template-cache", function() {
+
+    // Local dependency
+    var templateCache = require("gulp-angular-templatecache");
 
     // Globbing patterns
     var patterns = [

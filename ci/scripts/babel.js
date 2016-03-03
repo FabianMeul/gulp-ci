@@ -4,6 +4,7 @@
 // BabelJS transpiling to ES5.
 // This Gulpfile is written in ES6, #yolo.
 //
+
 "use strict";
 
 import gulp from "gulp";
@@ -17,6 +18,7 @@ import buildHelper from "./../build-helpers.js";
 
 // Transpile ES6 to classic ES5
 gulp.task("scripts:babel", () => {
+
     // Globbing patterns
     let patterns = [
         config.env.dev.scripts.dir + "**/*.js",

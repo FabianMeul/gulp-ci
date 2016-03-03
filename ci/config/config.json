@@ -11,11 +11,15 @@
             },
             "styles": {
                 "dir": "public/dev/assets/css/",
-                "files": "*.css"
+                "files": "**/*.css"
             },
             "scripts": {
                 "dir": "public/dev/assets/scripts/",
                 "files": "**/*.js"
+            },
+            "templates": {
+                "dir": "public/dev/assets/scripts/",
+                "files": "**/*.html"
             },
             "images": {
                 "dir": "public/dev/assets/img/",
