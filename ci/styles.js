@@ -4,12 +4,15 @@
 
 var gulp = require("gulp");
 var gutil = require("gulp-util"); // https://github.com/gulpjs/gulp-util
-var autoprefixer = require("gulp-autoprefixer"); // https://www.npmjs.com/package/gulp-autoprefixer
-var cssNano = require("gulp-cssnano"); // https://github.com/ben-eb/gulp-cssnano
 var sass = require("gulp-sass"); // https://www.npmjs.com/package/gulp-sass
 var sassGlob = require("gulp-sass-glob"); // https://www.npmjs.com/package/gulp-sass-glob
 var sourcemaps = require("gulp-sourcemaps"); // https://www.npmjs.com/package/gulp-sourcemaps
 var rename = require("gulp-rename"); // https://github.com/hparra/gulp-rename
+
+// PostCSS + plugins
+var postcss = require("gulp-postcss"); // https://github.com/postcss/gulp-postcss
+var autoprefixer = require("autoprefixer"); //https://github.com/postcss/autoprefixer
+var cssnano = require("cssnano"); // https://github.com/ben-eb/cssnano
 
 // Load the build configuration
 var config = require("./config/config.json");
@@ -38,22 +41,28 @@ var compileStyles = function compileStyles(env) {
         sourceRoot: "../../scss"
     };
 
+    // PostCSS processors
+    var processors = [
+        // Autoprefix
+        autoprefixer({ browsers: ["last 3 versions"] }),
+        // Minify
+        cssnano()
+    ];
+
     return gulp.src(source)
         .pipe(sourcemaps.init())
         // Glob sass files
         .pipe(sassGlob())
         // Compile sass
         .pipe(sass(options).on("error", sass.logError))
-        // Autoprefix the generated CSS file
-        .pipe(autoprefixer("last 3 versions"))
-        // Minify the CSS file
-        .pipe(cssNano())
+        // Run PostCSS processing
+        .pipe(postcss(processors))
         // Rename the generated CSS file
         .pipe(rename(buildHelper.addTimestamp("styles", ".min.css")))
         .pipe(sourcemaps.write("sourcemap", sourcemapOptions))
         // Save CSS files
         .pipe(gulp.dest(destination));
-}
+};
 
 
 // Compile sass
